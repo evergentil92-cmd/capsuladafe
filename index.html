@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Pote de Fé — 365 Cápsulas Digitais</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gold:       #C9A84C;
+  --gold-light: #F0D080;
+  --gold-pale:  #FBF0CC;
+  --brown:      #5C3A1E;
+  --brown-dark: #3A1A0A;
+  --cream:      #FDF6EC;
+  --cream-deep: #F5EAD5;
+  --rose:       #D4837A;
+  --rose-pale:  #FDF0EE;
+  --green:      #4A7C59;
+  --text:       #2E1A0A;
+  --text-soft:  #7A5535;
+  --white:      #FFFFFF;
+  --ff-serif:   'Cormorant Garamond', Georgia, serif;
+  --ff-sans:    'Jost', system-ui, sans-serif;
+  --shadow:     0 8px 40px rgba(58,26,10,0.13);
+  --shadow-lg:  0 20px 60px rgba(58,26,10,0.18);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ff-sans);
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+img { display:block; max-width:100%; }
+a  { text-decoration:none; color:inherit; }
+
+/* ── UTILITÁRIOS ────────────────────────────────────────── */
+.container { max-width: 700px; margin: 0 auto; padding: 0 24px; }
+.center   { text-align:center; }
+.gold     { color: var(--gold); }
+.serif    { font-family: var(--ff-serif); }
+
+/* ── REVEAL ON SCROLL ───────────────────────────────────── */
+.reveal {
+  opacity:0; transform:translateY(36px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+
+/* ══════════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════════ */
+.hero {
+  position:relative;
+  background: var(--brown-dark);
+  padding: 80px 24px 72px;
+  text-align:center;
+  overflow:hidden;
+}
+/* bokeh circles */
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(201,168,76,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(201,168,76,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(92,58,30,.4) 0%, transparent 80%);
+}
+/* grain texture */
+.hero::after {
+  content:'';
+  position:absolute; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-inner { position:relative; z-index:2; }
+
+.hero-badge {
+  display:inline-block;
+  border: 1px solid rgba(201,168,76,.5);
+  color: var(--gold);
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 7px 20px;
+  border-radius: 40px;
+  margin-bottom: 28px;
+  animation: fadeDown .6s ease both;
+}
+
+.hero h1 {
+  font-family: var(--ff-serif);
+  font-size: clamp(2.6rem, 8vw, 4.8rem);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.12;
+  letter-spacing: -.01em;
+  margin-bottom: 8px;
+  animation: fadeDown .7s .08s ease both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-size: clamp(.95rem, 2.2vw, 1.15rem);
+  color: rgba(253,246,236,.7);
+  font-weight: 300;
+  max-width: 520px;
+  margin: 20px auto 40px;
+  animation: fadeDown .7s .16s ease both;
+}
+
+.jar-icon {
+  font-size: 72px;
+  line-height:1;
+  margin: 0 auto 24px;
+  animation: float 4s ease-in-out infinite, fadeDown .7s .04s ease both;
+  display:block;
+}
+
+.hero-price-wrap {
+  animation: fadeDown .7s .24s ease both;
+  margin-bottom: 32px;
+}
+.hero-price-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(253,246,236,.45);
+  margin-bottom: 4px;
+}
+.hero-price {
+  font-family: var(--ff-serif);
+  font-size: clamp(3rem, 9vw, 5rem);
+  font-weight: 600;
+  color: var(--gold-light);
+  line-height:1;
+}
+.hero-price-note {
+  font-size: 12px;
+  color: rgba(253,246,236,.45);
+  margin-top: 6px;
+  letter-spacing:.5px;
+}
+
+.btn-hero {
+  display:inline-block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 55%, var(--gold) 100%);
+  color: var(--brown-dark);
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 20px 52px;
+  border-radius: 60px;
+  box-shadow: 0 12px 40px rgba(201,168,76,.45);
+  transition: transform .2s, box-shadow .2s;
+  animation: fadeDown .7s .32s ease both, pulse 2.5s 2s ease-in-out infinite;
+}
+.btn-hero:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(201,168,76,.6);
+}
+.hero-secure {
+  font-size: 11px;
+  color: rgba(253,246,236,.38);
+  margin-top: 16px;
+  letter-spacing:.5px;
+  animation: fadeDown .7s .4s ease both;
+}
+
+/* ── DIVIDER STRIPE ─────────────────────────────────────── */
+.stripe {
+  background: var(--gold);
+  padding: 11px 0;
+  text-align:center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--brown-dark);
+  overflow:hidden;
+  white-space:nowrap;
+}
+.stripe-inner {
+  display:inline-block;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ── SECTIONS ───────────────────────────────────────────── */
+.section { padding: 72px 0; }
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: var(--ff-serif);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.section-title em { font-style:italic; color:var(--gold); }
+.section-body {
+  font-size: 1rem;
+  color: var(--text-soft);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── DOR ────────────────────────────────────────────────── */
+.pain { background: var(--white); }
+.pain-list {
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+  margin-top: 36px;
+}
+.pain-list li {
+  display:flex;
+  align-items:flex-start;
+  gap: 14px;
+  background: var(--rose-pale);
+  border-left: 3px solid var(--rose);
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.pain-list li .icon {
+  font-size: 1.3rem;
+  flex-shrink:0;
+  margin-top:1px;
+}
+
+/* ── PRODUTO ─────────────────────────────────────────────── */
+.product { background: var(--cream-deep); }
+.product-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 44px 36px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(201,168,76,.25);
+  position:relative;
+  overflow:hidden;
+  margin-top: 40px;
+}
+.product-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.product-icon {
+  font-size: 64px;
+  margin: 0 auto 16px;
+  display:block;
+  text-align:center;
+}
+.product-card h3 {
+  font-family: var(--ff-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--brown-dark);
+  margin-bottom: 10px;
+  text-align:center;
+}
+.product-card p {
+  color: var(--text-soft);
+  font-size: .95rem;
+  font-weight:300;
+  line-height:1.8;
+  text-align:center;
+  margin-bottom: 24px;
+}
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  justify-content:center;
+}
+.tag {
+  background: var(--cream);
+  border: 1px solid var(--gold);
+  color: var(--brown);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 30px;
+}
+
+/* ── BONUS ───────────────────────────────────────────────── */
+.bonuses { background: var(--white); }
+.bonus-grid {
+  display:flex;
+  flex-direction:column;
+  gap: 14px;
+  margin-top: 40px;
+}
+.bonus-item {
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  background: var(--cream);
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  transition: transform .2s, box-shadow .2s;
+  cursor:default;
+}
+.bonus-item:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 24px rgba(201,168,76,.15);
+}
+.bonus-num {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--brown-dark);
+  font-family: var(--ff-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.bonus-content h4 {
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--brown-dark);
+  margin-bottom: 4px;
+}
+.bonus-content p {
+  font-size: .85rem;
+  color: var(--text-soft);
+  font-weight:300;
+  line-height:1.5;
+}
+.bonus-badge {
+  margin-left:auto;
+  flex-shrink:0;
+  background: #E8F5E9;
+  color: #2E7D32;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing:.5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space:nowrap;
+}
+
+/* ── COMO FUNCIONA ───────────────────────────────────────── */
+.how { background: var(--brown-dark); position:relative; overflow:hidden; }
+.how::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,.1) 0%, transparent 70%);
+}
+.how .section-title { color: var(--cream); }
+.how .section-body  { color: rgba(253,246,236,.65); }
+.steps {
+  display:flex;
+  flex-direction:column;
+  gap: 0;
+  margin-top: 44px;
+  position:relative;
+  z-index:2;
+}
+.step {
+  display:flex;
+  gap: 20px;
+  align-items:flex-start;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(201,168,76,.15);
+}
+.step:last-child { border-bottom:none; }
+.step-num {
+  font-family: var(--ff-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height:1;
+  flex-shrink:0;
+  width: 50px;
+  text-align:right;
+}
+.step-body h4 {
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.step-body p {
+  font-size: .9rem;
+  color: rgba(253,246,236,.6);
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* ── DEPOIMENTOS ─────────────────────────────────────────── */
+.testimonials { background: var(--cream-deep); }
+.testi-grid {
+  display:flex;
+  flex-direction:column;
+  gap: 16px;
+  margin-top: 40px;
+}
+.testi-card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  border: 1px solid rgba(201,168,76,.12);
+  position:relative;
+}
+.testi-card::before {
+  content:'\201C';
+  position:absolute;
+  top: 16px; left: 24px;
+  font-family: var(--ff-serif);
+  font-size: 4rem;
+  color: var(--gold-pale);
+  line-height:1;
+  pointer-events:none;
+}
+.testi-stars {
+  color: var(--gold);
+  font-size: .9rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.testi-text {
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-style:italic;
+  color: var(--text);
+  line-height:1.7;
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+.testi-author {
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.testi-avatar {
+  width: 38px; height:38px;
+  border-radius:50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brown-dark);
+  flex-shrink:0;
+}
+.testi-name {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--brown);
+  letter-spacing:.5px;
+}
+.testi-location {
+  font-size: .75rem;
+  color: var(--text-soft);
+  font-weight:300;
+}
+
+/* ── VALUE STACK / CTA ───────────────────────────────────── */
+.cta-section { background: var(--white); }
+.value-stack {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(201,168,76,.3);
+  box-shadow: var(--shadow);
+  margin: 40px auto 0;
+  max-width: 540px;
+}
+.value-line {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(201,168,76,.3);
+  font-size: .9rem;
+  color: var(--text-soft);
+  font-weight:300;
+}
+.value-line:last-of-type { border-bottom:none; }
+.value-line .strike {
+  text-decoration:line-through;
+  color: #bbb;
+  font-size: .82rem;
+}
+.value-total {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--gold);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.value-total .label {
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  color: var(--brown-dark);
+  font-weight:600;
+}
+.value-total .final {
+  font-family: var(--ff-serif);
+  font-size: 2.4rem;
+  color: var(--gold);
+  font-weight:700;
+  line-height:1;
+}
+.btn-cta {
+  display:block;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 55%, var(--gold) 100%);
+  color: var(--brown-dark);
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align:center;
+  padding: 22px;
+  border-radius: 60px;
+  box-shadow: 0 12px 40px rgba(201,168,76,.4);
+  margin: 28px auto 0;
+  max-width: 440px;
+  transition: transform .2s, box-shadow .2s;
+  animation: pulse 2.5s 1s ease-in-out infinite;
+}
+.btn-cta:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(201,168,76,.6);
+}
+.secure-badges {
+  display:flex;
+  justify-content:center;
+  gap: 24px;
+  margin-top: 18px;
+  flex-wrap:wrap;
+}
+.badge {
+  font-size: 11px;
+  color: var(--text-soft);
+  display:flex;
+  align-items:center;
+  gap: 5px;
+  font-weight:400;
+}
+
+/* ── FAQ ─────────────────────────────────────────────────── */
+.faq { background: var(--cream-deep); }
+.faq-list {
+  margin-top: 40px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid rgba(201,168,76,.15);
+  overflow:hidden;
+}
+.faq-q {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 18px 22px;
+  cursor:pointer;
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-weight:600;
+  color: var(--brown-dark);
+  gap:12px;
+  user-select:none;
+}
+.faq-arrow {
+  width: 24px; height:24px;
+  border-radius:50%;
+  background: var(--gold-pale);
+  color: var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: .75rem;
+  flex-shrink:0;
+  transition: transform .3s;
+}
+.faq-item.open .faq-arrow { transform:rotate(180deg); }
+.faq-a {
+  max-height:0;
+  overflow:hidden;
+  transition: max-height .4s ease, padding .3s;
+  font-size: .92rem;
+  color: var(--text-soft);
+  font-weight:300;
+  line-height:1.8;
+  padding: 0 22px;
+}
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding: 0 22px 18px;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer {
+  background: var(--brown-dark);
+  padding: 36px 24px;
+  text-align:center;
+}
+.footer-brand {
+  font-family: var(--ff-serif);
+  font-size: 1.4rem;
+  font-weight:600;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+}
+.footer-handle {
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+.footer-copy {
+  font-size: 11px;
+  color: rgba(253,246,236,.3);
+  line-height:1.8;
+}
+
+/* ── STICKY CTA ──────────────────────────────────────────── */
+.sticky-bar {
+  position:fixed;
+  bottom:0; left:0; right:0;
+  background: rgba(58,26,10,.96);
+  backdrop-filter: blur(12px);
+  padding: 14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  z-index:100;
+  border-top: 1px solid rgba(201,168,76,.3);
+  transform: translateY(100%);
+  transition: transform .4s ease;
+}
+.sticky-bar.visible { transform:translateY(0); }
+.sticky-text {
+  font-family: var(--ff-serif);
+  font-size: 1rem;
+  color: var(--cream);
+  font-style:italic;
+  line-height:1.3;
+}
+.sticky-text span {
+  display:block;
+  font-size: .75rem;
+  font-style:normal;
+  font-family: var(--ff-sans);
+  color: rgba(253,246,236,.5);
+  font-weight:300;
+  letter-spacing:.5px;
+}
+.btn-sticky {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--brown-dark);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding: 12px 28px;
+  border-radius: 40px;
+  white-space:nowrap;
+  flex-shrink:0;
+  transition: transform .2s;
+}
+.btn-sticky:hover { transform:scale(1.04); }
+
+/* ── GARANTIA BANNER ─────────────────────────────────────── */
+.garantia {
+  background: var(--green);
+  padding: 40px 24px;
+  text-align:center;
+}
+.garantia-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.garantia-icon { font-size: 3rem; margin-bottom: 12px; display:block; }
+.garantia h3 {
+  font-family: var(--ff-serif);
+  font-size: 1.6rem;
+  font-weight:600;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.garantia p {
+  font-size: .95rem;
+  color: rgba(255,255,255,.8);
+  font-weight:300;
+  line-height:1.8;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(-14px); }
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 12px 40px rgba(201,168,76,.4); }
+  50%      { box-shadow: 0 12px 60px rgba(201,168,76,.7); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:520px){
+  .hero h1 { font-size:2.2rem; }
+  .product-card { padding:30px 20px; }
+  .value-stack  { padding:24px 18px; }
+  .sticky-bar { flex-direction:column; gap:8px; }
+  .sticky-text { text-align:center; }
+  .btn-sticky { width:100%; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero" id="topo">
+  <div class="hero-inner">
+    <span class="jar-icon">🫙</span>
+    <div class="hero-badge">✦ &nbsp; Produto Digital — Acesso Imediato &nbsp; ✦</div>
+    <h1>Um pote cheio de <em>fé,<br>força e palavras</em><br>que curam</h1>
+    <p class="hero-sub">365 cápsulas digitais com versículos, frases motivacionais e mensagens de empoderamento — para imprimir, recortar e transformar seus dias com Deus.</p>
+    <div class="hero-price-wrap">
+      <p class="hero-price-label">Acesso completo por apenas</p>
+      <p class="hero-price">R$ 9,90</p>
+      <p class="hero-price-note">Pagamento único · PDF entregue por e-mail</p>
+    </div>
+    <a href="#comprar" class="btn-hero">🙏 &nbsp; Quero meu Pote de Fé</a>
+    <p class="hero-secure">🔒 &nbsp; Compra segura &nbsp;·&nbsp; 7 dias de garantia</p>
+  </div>
+</section>
+
+<!-- ── STRIPE ── -->
+<div class="stripe">
+  <span class="stripe-inner">
+    ✦ &nbsp; Mais de 500 mulheres já transformaram suas manhãs &nbsp;
+    ✦ &nbsp; Mais de 500 mulheres já transformaram suas manhãs &nbsp;
+    ✦ &nbsp; Mais de 500 mulheres já transformaram suas manhãs &nbsp;
+    ✦ &nbsp; Mais de 500 mulheres já transformaram suas manhãs &nbsp;
+  </span>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     DOR
+════════════════════════════════════════════════ -->
+<section class="section pain">
+  <div class="container center">
+    <p class="section-label reveal">Você se identifica?</p>
+    <h2 class="section-title reveal">Você já se sentiu <em>assim</em>?</h2>
+    <p class="section-body reveal">Esses sentimentos são mais comuns do que parece — e você merece uma virada todos os dias.</p>
+    <ul class="pain-list" style="max-width:580px;margin:36px auto 0;">
+      <li class="reveal reveal-delay-1"><span class="icon">😔</span> Acorda sem ânimo, sentindo que a fé está fraca e o coração pesado</li>
+      <li class="reveal reveal-delay-2"><span class="icon">😰</span> A ansiedade aperta e parece que Deus está distante</li>
+      <li class="reveal reveal-delay-3"><span class="icon">🌀</span> Fica o dia todo correndo, sem um momento só para você e Deus</li>
+      <li class="reveal"><span class="icon">💔</span> Quer se sentir mais empoderada e confiante, mas não sabe por onde começar</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     PRODUTO
+════════════════════════════════════════════════ -->
+<section class="section product">
+  <div class="container center">
+    <p class="section-label reveal">A solução</p>
+    <h2 class="section-title reveal">O que você vai <em>receber</em></h2>
+    <p class="section-body reveal">Tudo em PDF — baixa agora, imprime em casa e monta seu ritual de fé.</p>
+    <div class="product-card reveal">
+      <span class="product-icon">📖</span>
+      <h3>"365 Cápsulas da Fé"</h3>
+      <p>Um versículo ou frase transformadora para cada dia do ano. Imprima, recorte e coloque no seu potinho. Abra um papelzinho toda manhã e comece o dia com a Palavra de Deus no coração.</p>
+      <div class="tags">
+        <span class="tag">365 versículos</span>
+        <span class="tag">Fé & cura</span>
+        <span class="tag">Empoderamento</span>
+        <span class="tag">Família</span>
+        <span class="tag">Prosperidade</span>
+        <span class="tag">Ansiedade</span>
+        <span class="tag">Coragem</span>
+        <span class="tag">Proteção</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STRIPE ── -->
+<div class="stripe">
+  <span class="stripe-inner">
+    ✦ &nbsp; @meupotedafe no Instagram e TikTok &nbsp;
+    ✦ &nbsp; @meupotedafe no Instagram e TikTok &nbsp;
+    ✦ &nbsp; @meupotedafe no Instagram e TikTok &nbsp;
+    ✦ &nbsp; @meupotedafe no Instagram e TikTok &nbsp;
+  </span>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     BONUS
+════════════════════════════════════════════════ -->
+<section class="section bonuses">
+  <div class="container center">
+    <p class="section-label reveal">Inclusos no produto</p>
+    <h2 class="section-title reveal">🎁 &nbsp; 5 bônus <em>gratuitos</em></h2>
+    <p class="section-body reveal">Tudo junto no mesmo PDF. Sem custo extra.</p>
+    <div class="bonus-grid">
+      <div class="bonus-item reveal reveal-delay-1">
+        <div class="bonus-num">1</div>
+        <div class="bonus-content">
+          <h4>"Eu Sou Poderosa"</h4>
+          <p>30 frases de empoderamento feminino cristão para você lembrar de quem é em Cristo — todo dia.</p>
+        </div>
+        <span class="bonus-badge">GRÁTIS</span>
+      </div>
+      <div class="bonus-item reveal reveal-delay-2">
+        <div class="bonus-num">2</div>
+        <div class="bonus-content">
+          <h4>"Cápsulas por Necessidade"</h4>
+          <p>Versículos organizados por tema: ansiedade, cura, prosperidade, família e coragem. Use quando precisar.</p>
+        </div>
+        <span class="bonus-badge">GRÁTIS</span>
+      </div>
+      <div class="bonus-item reveal reveal-delay-3">
+        <div class="bonus-num">3</div>
+        <div class="bonus-content">
+          <h4>"Vista seu Pote"</h4>
+          <p>12 etiquetas lindas para imprimir e decorar seu potinho + passo a passo de como montar sua cápsula física.</p>
+        </div>
+        <span class="bonus-badge">GRÁTIS</span>
+      </div>
+      <div class="bonus-item reveal">
+        <div class="bonus-num">4</div>
+        <div class="bonus-content">
+          <h4>"7 Dias com Deus"</h4>
+          <p>Devocional em PDF com reflexão e oração para 7 dias. Perfeito para retomar o hábito da devoção diária.</p>
+        </div>
+        <span class="bonus-badge">GRÁTIS</span>
+      </div>
+      <div class="bonus-item reveal">
+        <div class="bonus-num">5</div>
+        <div class="bonus-content">
+          <h4>"Cápsulas que Curam"</h4>
+          <p>20 mensagens especiais para Janeiro Branco e Outubro Rosa — saúde emocional e física com fé.</p>
+        </div>
+        <span class="bonus-badge">GRÁTIS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     COMO FUNCIONA
+════════════════════════════════════════════════ -->
+<section class="section how">
+  <div class="container center" style="position:relative;z-index:2;">
+    <p class="section-label reveal" style="color:var(--gold);">Simples assim</p>
+    <h2 class="section-title reveal">Como funciona</h2>
+    <p class="section-body reveal">Em 4 passos você já tem seu ritual de fé montado.</p>
+    <div class="steps" style="text-align:left;">
+      <div class="step reveal">
+        <span class="step-num">01</span>
+        <div class="step-body">
+          <h4>Compre e receba o PDF</h4>
+          <p>Após o pagamento você recebe o PDF por e-mail em segundos. Acesso imediato, sem espera.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">02</span>
+        <div class="step-body">
+          <h4>Imprima e recorte</h4>
+          <p>Imprima as páginas em papel sulfite comum e recorte cada cápsula. Não precisa de nada especial.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">03</span>
+        <div class="step-body">
+          <h4>Monte seu potinho</h4>
+          <p>Dobre os papéis e coloque dentro de um potinho de vidro. Cole a etiqueta e personalize do seu jeito.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <span class="step-num">04</span>
+        <div class="step-body">
+          <h4>Abra um papelzinho toda manhã</h4>
+          <p>Toda manhã retire uma cápsula, leia em voz alta e leve aquela palavra no coração durante o dia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     DEPOIMENTOS
+════════════════════════════════════════════════ -->
+<section class="section testimonials">
+  <div class="container center">
+    <p class="section-label reveal">Quem já tem</p>
+    <h2 class="section-title reveal">O que estão <em>dizendo</em></h2>
+    <p class="section-body reveal">Mulheres que já transformaram suas manhãs com o Pote de Fé 🌸</p>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Comecei a abrir uma cápsula toda manhã antes do café. Parece que Deus fala diretamente pro meu coração. Recomendo de olhos fechados!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <p class="testi-name">Ana Paula</p>
+            <p class="testi-location">Minas Gerais</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Dei de presente para minha mãe e ela amou! Imprimimos juntas, decoramos o potinho e virou um ritual de fé da família. Muito obrigada!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">C</div>
+          <div>
+            <p class="testi-name">Camila</p>
+            <p class="testi-location">São Paulo</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Estava passando por um momento muito difícil. As cápsulas de ansiedade me salvaram várias vezes. Que produto abençoado!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">F</div>
+          <div>
+            <p class="testi-name">Fernanda</p>
+            <p class="testi-location">Rio de Janeiro</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Comprei para dar de lembrancinha na minha célula. As meninas amaram! Cada semana abrimos juntas uma cápsula no início do encontro. É lindo demais!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <p class="testi-name">Renata</p>
+            <p class="testi-location">Paraná</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     GARANTIA
+════════════════════════════════════════════════ -->
+<section class="garantia">
+  <div class="garantia-inner reveal">
+    <span class="garantia-icon">🛡️</span>
+    <h3>Garantia de 7 dias</h3>
+    <p>Se por qualquer motivo você não ficar satisfeita, basta entrar em contato em até 7 dias após a compra e devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     CTA FINAL
+════════════════════════════════════════════════ -->
+<section class="section cta-section" id="comprar">
+  <div class="container center">
+    <p class="section-label reveal">Tudo isso por apenas</p>
+    <h2 class="section-title reveal">Leve seu Pote de Fé <em>agora</em></h2>
+    <div class="value-stack reveal">
+      <div class="value-line">
+        <span>📖 365 Cápsulas da Fé</span>
+        <span class="strike">R$ 17,00</span>
+      </div>
+      <div class="value-line">
+        <span>👑 Bônus "Eu Sou Poderosa"</span>
+        <span class="strike">R$ 7,00</span>
+      </div>
+      <div class="value-line">
+        <span>🙏 Bônus "Cápsulas por Necessidade"</span>
+        <span class="strike">R$ 5,00</span>
+      </div>
+      <div class="value-line">
+        <span>🎨 Bônus "Vista seu Pote"</span>
+        <span class="strike">R$ 5,00</span>
+      </div>
+      <div class="value-line">
+        <span>📅 Bônus "7 Dias com Deus"</span>
+        <span class="strike">R$ 7,00</span>
+      </div>
+      <div class="value-line">
+        <span>🎀 Bônus "Cápsulas que Curam"</span>
+        <span class="strike">R$ 5,00</span>
+      </div>
+      <div class="value-total">
+        <span class="label">Tudo isso por:</span>
+        <span class="final">R$ 9,90</span>
+      </div>
+    </div>
+    <a href="#" class="btn-cta reveal">🙏 &nbsp; Garantir meu Pote de Fé agora</a>
+    <div class="secure-badges reveal">
+      <span class="badge">🔒 Pagamento Seguro</span>
+      <span class="badge">📧 Acesso Imediato</span>
+      <span class="badge">✅ 7 Dias de Garantia</span>
+      <span class="badge">💛 Suporte por Instagram</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════ -->
+<section class="section faq">
+  <div class="container">
+    <p class="section-label reveal center">Dúvidas frequentes</p>
+    <h2 class="section-title reveal center">Perguntas <em>respondidas</em></h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          Como vou receber o produto?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Após a confirmação do pagamento, você recebe o PDF direto no seu e-mail em poucos minutos. É só baixar, imprimir e montar seu ritual!</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          Precisa de impressora especial?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Não! Qualquer impressora jato de tinta ou laser serve. Pode usar papel sulfite comum (75g). Se quiser mais brilho, use papel fotográfico — mas não é obrigatório.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          Posso usar como lembrancinha de igreja?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Sim! O produto foi feito para isso. Você pode imprimir quantas vezes quiser para uso pessoal e presentear as pessoas ao seu redor. Para venda em escala, temos o Kit Igreja com mais de 1000 cápsulas temáticas.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          E se eu não gostar?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Você tem 7 dias de garantia total. Se não ficar satisfeita por qualquer motivo, entre em contato pelo Instagram @meupotedafe e devolvemos 100% do valor. Sem burocracia.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          Onde compro o potinho para montar?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-a">Potinhos de vidro com tampa você encontra em bazares, lojas de R$ 1,99 e no Mercado Livre por valores a partir de R$ 3,00. O bônus "Vista seu Pote" tem um guia completo com dicas de onde comprar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer class="footer">
+  <p class="footer-brand">Meu Pote de Fé</p>
+  <p class="footer-handle">@meupotedafe &nbsp;·&nbsp; Instagram & TikTok</p>
+  <p class="footer-copy">
+    © 2025 Meu Pote de Fé · Todos os direitos reservados<br>
+    Produto digital — entregue por e-mail após confirmação do pagamento<br>
+    Dúvidas? Fale conosco pelo Instagram <strong style="color:var(--gold-light)">@meupotedafe</strong>
+  </p>
+</footer>
+
+<!-- ── STICKY BAR ── -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-text">
+    Meu Pote de Fé — 365 cápsulas + 5 bônus
+    <span>Produto digital · acesso imediato</span>
+  </div>
+  <a href="#comprar" class="btn-sticky">Quero por R$ 9,90</a>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════ -->
+<script>
+// ── Reveal on scroll ──────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── FAQ accordion ─────────────────────────────────────────
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── Sticky bar ────────────────────────────────────────────
+const bar   = document.getElementById('stickyBar');
+const hero  = document.querySelector('.hero');
+const comprar = document.getElementById('comprar');
+window.addEventListener('scroll', () => {
+  const heroBot = hero.getBoundingClientRect().bottom;
+  const ctaTop  = comprar.getBoundingClientRect().top;
+  bar.classList.toggle('visible', heroBot < 0 && ctaTop > window.innerHeight);
+});
+</script>
+</body>
+</html>
